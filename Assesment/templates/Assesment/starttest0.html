@@ -1,0 +1,150 @@
+
+{% extends 'Assesment/partials/dependencies.html' %}
+{% comment %} {% extends 'Assesment/partials/student_base.html'%} {% endcomment %}
+
+
+{% load widget_tweaks %}
+{% block content %}
+
+
+<html lang="en">
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<br><br>
+
+<body style="background-color:#E2f3f7;">
+  
+
+    <header class="hero">
+        <div class="container spacing  text-center">
+          <h1 class="primary-title">Welcome to Mercados EMI Employee Assessment Portal </h1>
+          <p style="margin-top : 40px"> Please go through the following guidelines before starting the test,<b> All The Best!</b>  </p>
+        </div>
+
+        <div class="container spacing  text-center" style="margin-top : 40px" >
+            <h5><u>Examination Conduct</u></h5>
+          <ul class="fluid">
+            
+            <li>You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. 
+            </li>
+            <li>You are not permitted to have on your desk or on your person any unauthorised material during this examination. This includes but not limited to: 
+                <ul>
+                  <li>Mobile phones</li>
+                  <li> Smart watches and bands</li>
+                  <li>Electronic devices (including additional monitors, earphones, headphones etc)</li>
+                  <li>Headwear (hats, hoodies excluding religious headwear)</li>
+                  <li>Draft paper (unless permitted)</li>
+                  <li>Textbooks (unless specified)</li>
+                  <li>Notes (unless specified)</li>
+                </ul>
+             </li>
+            <li>You are not permitted to take screenshots, record the screen, copy and paste questions or answers or otherwise attempt to take any of the content of this exam out of the exam for any purpose.</li>
+            <li>You are not permitted to post any requests for clarification of exam content. Answer all questions to the best of your ability and perception of the questions’ intent, make reasonable assumptions if necessary, to answer all questions. UTS assessments never apply negative marking techniques. </li>
+            <li>You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. </li>
+            <li>Misconduct activity will lead to disqualification of candidature.</li>  
+            </ul>
+
+            <ul class="fluid">
+            <h5><u> Exam instructions </u></h5>
+            
+            <li> There are 60 in questions in this exam and will be presented one at a time.</li>
+            <li>Each question is worth the same marks. </li>
+            <li>During this exam you won’t be permitted to review previous questions.</li>       
+            </ol>
+            </ul>      
+        </div>
+      </header>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <div class="checkbox" align="center">
+        <input id="check" name="checkbox" type="checkbox">
+        <label for="check">I have thoroughly gone through the above details.</label><!-- for must be the id of input -->
+      </div>
+
+    <script>
+      $(function() {
+        var chk = $('#check');
+        var btn = $("#start" );
+      
+        chk.on('change', function() {
+          btn.prop("disabled", !this.checked);//true: disabled, false: enabled
+        }).trigger('change'); //page load trigger event
+      });
+    </script>
+      {% comment %} I have thoroughly gone through the above details. {% endcomment %}
+    
+
+	<div class="container text-center">
+		<div class="btn-group-vertical w-75" >
+     
+			<button class="btn btn-primary btn-lg btn-block" id="start"  style="margin-top : 10px; border-radius: 10px !important">START TEST</button>
+   
+		</div>
+
+    {% comment %} <a  href="/"  type="button" class="btn btn-primary btn-lg btn-block"  style="margin-top : 30px; border-radius: 10px !important"> {% endcomment %}
+    {% block script %}
+    <script type="text/javascript">
+      setTimeout(function(){  
+        var element = document.getElementById("start") ;
+        element.disabled = false;
+    }, 30000);
+
+    window.onload = function(){
+      document.getElementById("start").disabled = true;
+      setTimeout(function(){  
+          var element = document.getElementById("start") ;
+          element.disabled = false;
+      }, 30000);
+  }
+    var params = new URLSearchParams(window.location.search)
+    var cat = params.get('category')
+
+
+    document.getElementById("start").onclick = function () {
+    console.log("click")
+        location.href = "/?category=" + cat;
+    };
+</script>
+
+  <p>Please go through the Above guidelines. Start button will be activated after a while.</p>
+{% endblock script %}
+
+</body>
+	</div>
+  
+{% endblock %}
+
+{% comment %} Examination Conduct
+
+You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. 
+
+You are not permitted to have on your desk or on your person any unauthorised material during this examination. This includes but not limited to: 
+Mobile phones 
+Smart watches and bands 
+Electronic devices (including additional monitors, earphones, headphones etc) 
+Headwear (hats, hoodies excluding religious headwear) 
+Draft paper (unless permitted) 
+Textbooks (unless specified) 
+Notes (unless specified) 
+
+You are not permitted to take screenshots, record the screen, copy and paste questions or answers or otherwise attempt to take any of the content of this exam out of the exam for any purpose. 
+
+You are not permitted to post any requests for clarification of exam content. Answer all questions to the best of your ability and perception of the questions’ intent, make reasonable assumptions if necessary, to answer all questions. UTS assessments never apply negative marking techniques. 
+
+Misconduct action will lead to disqualification of candidature.
+
+You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. 
+
+Exam instructions.
+
+ 
+
+There are X questions in this exam and will be presented one at a time/all at once. 
+
+Each question is worth the same/different marks.  
+
+During this exam you won’t be permitted to review previous questions.   {% endcomment %}

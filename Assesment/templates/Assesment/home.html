@@ -1,0 +1,242 @@
+{% extends 'Assesment/partials/student_base.html'%}
+
+{% comment %} {% extends 'Assesment/partials/dependencies.html' %} {% endcomment %}
+ 
+{% block content %}
+{% load static %}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  
+  
+  </head>
+
+<style>
+ {
+   text-decoration: none;
+   display: inline-block;
+   padding: 20px;
+   font-size: 35px;
+   width: 40px;
+   text-align: center;
+}
+.back:hover {
+   background-color: #ddd;
+   color: black;
+}
+.next:hover {
+   background-color: #279dc5;
+   color: white;
+}
+
+.previous:hover {
+    background-color: #279dc5;
+    color: white;
+ }
+.back {
+   border-radius: 50%;
+   background-color: #acacac;
+   color: black;
+}
+.next {
+   border-radius: 10%;
+   background-color:  #f1f1f1;
+   color: black;
+}
+.previous {
+    border-radius: 10%;
+    background-color: #f1f1f1;
+    color: black;
+}
+
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous">
+</script>
+
+<div class="jumbotron my-4">
+<br><br>
+    
+{% comment %} <h2 style="text-align: center;"><u> Assesment: {{category_name}} </u></h2> {% endcomment %}
+ 
+<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;" ><b>Time Left: 60:00 </b></div>
+ 
+<form class= "form" method='post'  id="question_card" action='#'>
+    {% csrf_token %}
+    <h2 style="text-align: center;"><u> Assesment:{{category_name}} </u></h2>
+    
+    {% for q  in category %}
+    
+    <div class="question-panel">
+        <div class="text-danger" >
+      <label for="question"> {{q.qno}} {{q.question}}</label>
+    </div>
+    </div>
+    {% comment %} {% if q.questiontype is "multiple choice" %} {% endcomment %}
+    <div class="form-check">
+        <div class="form-check">
+            {% if q.saved_answer == "option1" %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1" checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1" >
+            {% endif %}
+            <label class="form-check-label" for="gridRadios1">
+                {{q.op1}}
+            </label>
+        </div>
+        <div class="form-check">
+            {% if q.saved_answer == "option2" %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option2" checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option2">
+            {% endif %}
+            <label class="form-check-label" for="gridRadios2">
+                {{q.op2}}
+            </label>
+        </div>
+        <div class="form-check">
+            {% if q.saved_answer == "option3" %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option3"  checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option3">
+            {% endif %}
+            <label class="form-check-label" for="gridRadios1">
+                {{q.op3}}
+            </label>
+        </div>
+        <div class="form-check">
+            {% if q.saved_answer == "option4" %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option4 " checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option4">
+            {% endif %}
+            <label class="form-check-label" for="gridRadios2">
+                {{q.op4}}    
+            </label>
+        </div>
+    {% comment %} {% elif q.questiontype is "single answer" %}
+    <div class="form-ans">
+        <input type="float">
+    </div>
+    {% endif %} {% endcomment %}
+    
+        <br>
+    </div>    
+    {% endfor %}
+    <center>
+        {% if questions.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{questions.previous_page_number}}" class="previous">PREVIOUS</a> {# link to the prev page #}
+        {% endif %}
+        <span>{{questions.number}}</span> {# the current page number #}
+        
+        {% if questions.has_next %} {# whether the next page exists #}
+            <a href="?page={{questions.next_page_number}}"  class="next">NEXT</a> {# link to the next page #}
+        {% endif %}
+    </center>
+
+
+    <input id='timer' type='hidden' name="timer" value="">
+    <br>
+    <button type="submit" class="btn btn-primary" > Save Answers </button>
+  </form>
+
+{% comment %} <script type= "text/Javascipt">
+    $("form-check").onChange(function()
+        $.ajax({
+            url: '',
+            type:'POST', 
+            quest={}
+            quest[""]
+            data= 
+        });
+    
+    )
+
+ 
+</script> {% endcomment %}
+
+
+  {% comment %} <form method='post' action=''>
+    {% csrf_token %}
+    {% for q  in verbal_questions.object_list %}
+    <div class="question-panel">
+        <div class="question" >
+      <label for="question">{{q.question}}</label>
+    </div>
+    </div>
+    <div class="form-check">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1" checked>
+            <label class="form-check-label" for="gridRadios1">
+                {{q.op1}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option2">
+            <label class="form-check-label" for="gridRadios2">
+                {{q.op2}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option3">
+            <label class="form-check-label" for="gridRadios1">
+                {{q.op3}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option4">
+            <label class="form-check-label" for="gridRadios2">
+                {{q.op4}}
+            </label>
+        </div>
+        <br>
+    </div>    
+    {% endfor %}
+    <center>
+        {% if questions.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{questions.previous_page_number}}" class="previous">PREVIOUS</a> {# link to the prev page #}
+        {% endif %}
+        <span>{{questions.number}}</span> {# the current page number #}
+        
+        {% if questions.has_next %} {# whether the next page exists #}
+            <a href="?page={{questions.next_page_number}}"  class="next">NEXT</a> {# link to the next page #}
+        {% endif %}
+    </center>
+    <input id='timer' type='hidden' name="timer" value="">
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form> {% endcomment %}
+
+
+    {% block script %}
+        <script>
+            window.onbeforeunload = function() {
+                return "Data will be lost if you leave the page, are you sure?";
+            }; 
+ 
+            window.onload = function() {
+                var minute = 1;
+                var sec = 60;
+                setInterval(function() {
+                  document.getElementById("timer").innerHTML = " <b> Time Left : "+ minute + " <b>: " + sec;
+                  sec--;
+                  if (sec == 00) {
+                    minute --;
+                    sec = 60;
+                    
+                  }
+                }, 1000);
+              }
+            </script> 
+
+        </script>
+    {% endblock script %}
+</div>
+{% endblock %}

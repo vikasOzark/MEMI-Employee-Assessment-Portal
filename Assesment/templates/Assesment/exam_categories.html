@@ -1,0 +1,269 @@
+{% extends 'Assesment/partials/student_base.html'%}
+{% block content %}
+{%load static%}
+
+ <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+
+
+>
+
+<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;" ><b>Time Left: 60:00 </b></div>
+
+<div class="container" style= " margin-top:100px;" >
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title"><strong>Assesment Categories</strong></h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table" >
+      <head>
+        <tr>
+
+          <th>Exam Name</th>
+          
+          <th>Action</th>
+
+          <th>Status</th>
+
+        </tr>
+      </head>
+      {% for c in courses_categories %}
+
+      <tr>
+
+        <td> <strong>{{c.category}} </strong> </td>
+        
+        {% if c.attempt == True  %}
+        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="/?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Review Answers</a></td>
+        {% else %}
+        
+        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="/starttest?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+        {% endif %}
+        <td><b> {{c.attempted}} Attempted ; {{c.remaining}} Remaining </b> </td>
+
+      </tr>
+      {% endfor %}
+    </table>
+  <input id="timer" type='hidden' name="timer" value="">
+
+</div>
+
+</div>
+<div class="container text-center">
+  <div class="btn-group-vertical w-75" >
+   
+    <button class="btn btn-primary btn-lg btn-block" onclick="location.href = '/thankyoupge'" id="start"  style="margin-top : 10px; border-radius: 10px !important"> Submit All Answers</button>
+ 
+</div>
+
+{% block script %}
+<script type="text/javascript">
+  setTimeout(function(){  
+    var element = document.getElementById("start") ;
+    element.disabled = false;
+}, 3000);
+
+window.onload = function(){
+  document.getElementById("start").disabled = true;
+  setTimeout(function(){  
+      var element = document.getElementById("start") ;
+      element.disabled = false;
+  }, 3000);
+}
+
+window.onload = function() {
+  var minute = 59;
+  var sec = 60;
+  setInterval(function() {
+    document.getElementById("timer").innerHTML = " <b> Time Left : "+ minute + " <b>: " + sec;
+    sec--;
+    if (sec == 00) {
+      minute --;
+      sec = 60;
+      if (minute == 0)  {
+        // stop timer
+         clearInterval(interval);
+        // click
+         document.getElementById('start').click();            
+    }
+    }
+  }, 1000)
+}
+
+
+{% comment %} console.log('hello world')
+const timer=document.getElementById('displaytimer')
+console.log(timer.textContent)
+const inputtag = document.getElementById('timer')
+
+t=1200 
+setInterval(()=>{
+    t-=1
+    timer.innerHTML ="<b> Time Left: " +t+" seconds</b>"
+    inputtag.value = t
+},1000)  {% endcomment %}
+
+</script>
+{% endblock script %}
+
+<br><br><br><br><br><br> 
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.................................................................................................................................
+{% comment %} {% extends 'Assesment/partials/student_base.html' %}
+{% comment %} {% extends 'Assesment/partials/dependencies.html' %} {% endcomment %}
+{% comment %}{% block content %}
+{%load static%}
+
+<head>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous">
+    </script> 
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Available Courses</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Exam Name</th>
+          
+          <th>Action</th>
+        </tr>
+      </thead>
+      {% for c in courses_category %}
+      <tr>
+        
+        <td> {{c.category}}</td>
+        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="{% url 'take-exam' t.id  %}"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<br><br><br><br><br><br>
+{% endblock content %} {% endcomment %}

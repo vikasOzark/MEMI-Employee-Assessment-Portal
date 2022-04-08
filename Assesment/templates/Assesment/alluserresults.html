@@ -1,0 +1,45 @@
+{% extends 'Assesment/partials/dependencies.html' %}
+{% block content %}
+<head>
+   <title>HTML Document Structure Tutorial</title>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+
+<body style="background-color:#E2f3f7;">
+
+<div class="container" >
+<h2 class="primary-title" align="center " style="background-color:#85c5f1; color:#004990;"><u>All Candidate Results<u></h2>
+<table class="table table-bordered">
+    <thead class="thead" bgcolor=" #B7e1f5">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Percentage Scored</th>
+        <th scope="col">Time Taken</tr>
+    </thead>
+    <body>
+      {% comment %} <% var row = 0 %>
+      <% console.log("row ", row) %> {% endcomment %}
+    {% for results in allresults %}
+      <tr>
+        <td>{{results.username}}</td>
+        <td>{{results.percent}}</td> 
+        <td>{{results.time}}</td>
+        
+      </tr>
+      {% endfor %}
+      <tr>
+    </tbody>
+  </table>
+  
+</div>
+</body>
+</html>
+{% endblock %}
+
+
+

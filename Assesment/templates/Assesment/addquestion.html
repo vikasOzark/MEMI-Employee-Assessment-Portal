@@ -1,0 +1,25 @@
+{% extends 'Assesment/partials/dependencies.html' %}
+ 
+{% block content %}
+ 
+
+<body style="background-color:#E2f3f7;" >
+<div class="jumbotron container row" style="background-color:#e1eff0;">
+    <div class="col-md-6">
+        <h1 class="primary-title" align="center " style= "color:#004990;"  >Add Question</h1>
+        <div class="card card-body" style="background-color:#bbe7e6;" >
+           <form action="" method="POST">
+              {% csrf_token %}
+                {{form.as_p}}
+                <br>
+                <input type="submit" name="Submit" />
+             
+             </form>
+            
+            </div>
+        </div>
+    </div>
+ 
+</div>
+</body >
+{% endblock %}

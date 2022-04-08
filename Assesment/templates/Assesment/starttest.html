@@ -1,0 +1,97 @@
+{% extends 'Assesment/partials/student_base.html'%}
+{% block content %}
+{%load static%}
+{% load widget_tweaks %}
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+      
+  </head>
+
+  <script type="text/javascript">
+    var params = new URLSearchParams(window.location.search)
+    var cat = params.get('category')
+  </script>
+  
+  <br><br>
+    <div class="jumbotron">
+
+        <div class="row">
+
+            <div class="card border-info mx-4 my-4">
+                <div class="card-body text-default">
+                    <h4 class="card-title">Exam Details :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>Test Category: <strong>{{category}} </strong></li>
+                            <li>Total Question : 20</li>
+                            <li>Total Marks : 20 </li>
+
+                        </ul>
+                    <p></p>
+                    <h4 class="card-title">Rules :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>All questions are MCQ (multiple choice question)</li>
+                            <li><span class="text-danger">Only one choice is correct among the given.</span></li>
+                            <li>Every question carry different marks.</li>
+                            <li>Try to answer ASAP.</li>
+                            <li>If you PRESS refresh or go back to the previous page, there will be a new question for you and the question you were on will be counted as number of attempts.</li>
+                            <li>Questions are presented randomly.</li>
+                            <li>You will be able to view marks immediately once after you submit the answer.</li>
+                        </ul>
+
+                    <p></p>    
+                    <button class="btn btn-success" id="start"  style="margin-top : 10px; border-radius: 10px " >Enter Examination</button>
+                    
+                </div>  
+                <div class="info" style= "background-color: #e7f3fe;">
+                    <p><strong>  Note:</strong>&nbsp;&nbsp;&nbsp;Above test link shall be activated in a while. Proceed only when you have gone through the above information thoroughly. </p>
+                  </div>
+                <div class="card-footer">Best Of Luck!</div>  
+            </div>  
+        </div>  
+    </div>
+<div>
+
+
+  <div class="container text-center">
+		<div class="btn-group-vertical w-75" >
+     
+			{% comment %} <button class="btn btn-success" id="start"  style="margin-top : 10px; border-radius: 10px !important">START TEST</button> {% endcomment %}
+   
+		</div>
+
+    {% comment %} <a  href="/"  type="button" class="btn btn-primary btn-lg btn-block"  style="margin-top : 30px; border-radius: 10px !important"> {% endcomment %}
+    {% block script %}
+    <script type="text/javascript">
+    
+    window.onload = function(){
+      document.getElementById("start").disabled = true;
+      setTimeout(function(){  
+          var element = document.getElementById("start") ;
+          element.disabled = false;
+      }, 3000);
+  } 
+    var params = new URLSearchParams(window.location.search)
+    var cat = params.get('category')
+
+
+    document.getElementById("start").onclick = function () {
+    console.log("click")
+        location.href = "/?category=" + cat;
+    };
+</script>
+
+{% endblock script %}
+
+</script>
+
+<br><br><br><br><br><br>
+{% endblock content %}

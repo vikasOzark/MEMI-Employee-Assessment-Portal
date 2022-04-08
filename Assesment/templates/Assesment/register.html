@@ -1,0 +1,64 @@
+{% extends 'Assesment/partials/dependencies.html' %}
+{% load static %}
+{% block content %}
+<div class="container jumbotron">
+    <h1  align="center " style="background-color:#85c5f1; color:#004990; margin-bottom : 60px; font-size: 2.25em;">Add Candidate</h1>
+    <form method="POST" action="" >
+        {% csrf_token %}
+        {{form.as_p}}
+       
+        <input class="btn btn-success" type="submit" value="Add Candidate">
+    </form>
+</div>
+<head>
+    <title>HTML Document Structure Tutorial</title>
+    
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+ </head>
+ 
+ <body style="background-color:#E2f3f7;">
+ 
+ <div class="container" >
+ <h2 class="primary-title" align="center " style="background-color:#85c5f1; color:#004990;">All Candidates</h2>
+ <table class="table table-bordered">
+     <thead class="thead" bgcolor=" #B7e1f5">
+       <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Assesment taken</th>
+        <th scope="col">Re-Assesment taken</th>
+        <th scope="col">Last Activity<th>
+        <th scope="col"> </th>
+
+          
+
+     </thead>
+     <body>
+       {% comment %} <% var row = 0 %>
+       <% console.log("row ", row) %> {% endcomment %}
+     {% for results in allresults %}
+       <tr>
+         <td>{{results.username}}</td>
+         <td>m.sauvik11@gmail.com</td> 
+         <td>yes</td>
+         <td>no</td>
+         <td >15/01/2022</td>
+         <td > <a class="nav-link" href="/alluserresults"> >> </a></td> 
+         {% comment %} All Results {% endcomment %}
+       </tr>
+       {% endfor %}
+       <tr>
+     </tbody>
+   </table>
+   
+ </div>
+ </body>
+ </html>
+ {% endblock %}
+ 
+
+

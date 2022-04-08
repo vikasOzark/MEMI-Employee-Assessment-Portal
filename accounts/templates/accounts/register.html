@@ -1,0 +1,65 @@
+{% extends 'Assesment/partials/dependencies.html' %}
+% load static %}
+{% block content %}
+<div class="container jumbotron" style="background-color:#bbe7e6;" >
+  {% include 'Assesment/messages.html'%}
+    <h1  align="center " style=" color:#004990; margin-bottom : 60px; font-size: 2.25em;">Add Candidate </h1>
+    <form method="POST" action="" >
+        {% csrf_token %}
+        {{form.as_p}}
+       
+        <input class="btn btn-success" type="submit" value="Add Candidate">
+        <input class="btn btn-success" type="submit" value="Schedule Invite Mail">
+    </form>
+</div>
+<head>
+    <title>HTML Document Structure Tutorial</title>
+    
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+ </head>
+ 
+ <body style="background-color:#E2f3f7;">
+ 
+ <div class="container"   style="background-color:#bbe7e6;">
+ <h2 class="primary-title" align="center " style=" color:#004990;">All Candidates</h2>
+ <table class="table table-bordered" style="margin-top: 40px" :>
+     <thead class="thead" bgcolor=" #B7e1f5">
+       <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Assesment taken</th>
+        <th scope="col">Re-Assesment taken</th>
+        <th scope="col">Last Activity<th>
+        <th scope="col"> </th>
+
+          
+
+     </thead>
+     <body>
+       {% comment %} <% var row = 0 %>
+       <% console.log("row ", row) %> {% endcomment %}
+     {% for users in allresults %}
+       <tr>
+         <td>{{users.fullname}}</td>
+         <td>{{users.email}}</td> 
+         <td>{{users.assesment_taken}}</td>
+         <td>{{'na'}}</td>
+         <td >{{users.last_login}}</td>
+         <td > <a class="nav-link" href="/candidateinfo/?username={{users.username}}"> >> </a></td> 
+         {% comment %} All Results {% endcomment %}
+       </tr>
+       {% endfor %}
+       <tr>
+     </tbody>
+   </table>
+   
+ </div>
+ </body>
+ </html>
+
+
+{% endblock %}

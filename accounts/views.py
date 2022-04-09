@@ -1,3 +1,4 @@
+from termios import ECHOE
 from django.shortcuts import render
 from django.contrib import messages
 from . import forms,models
@@ -13,7 +14,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 import os
 from Assesment.models import categories
-
+from accounts.send_email import *
 class LoginView(auth_views.LoginView):
     # form_class = LoginForm
     template_name = 'accounts/login.html'
@@ -53,7 +54,12 @@ class RegisterView(generic.CreateView):
             form = RegisterForm(request.POST)
             print("request.POST", request.POST)
             if form.is_valid() :
-                request.user=form.save()
+                #request.user=form.save()
+                user = CustomUser.objects.create_user(fullname=form.cleaned_data['fullname'],username =form.cleaned_data['email'],  email=form.cleaned_data['email'], password='letsdoit')
+                user.is_active = True
+                user.save()
+                mail = send_login_mail(request = request,user = user)
+                #instance.save()
                 messages.success(request, 'Contact request submitted successfully.')
                 allresults= list(CustomUser.objects.values('fullname','email','last_login','username', 'assesment_taken')) 
                 form =  RegisterForm 
@@ -255,3 +261,22 @@ def candidateinfo(request):
         return redirect('/candidateinfo')
 
 
+def user_login(request,id):
+    try:
+        user=CustomUser.objects.get(id = id)
+    except:
+        return render(request,'accounts/login.html')
+    CandidateForm= forms.CandidateForm()
+    
+    mydict={ 
+        'CandidateForm': CandidateForm
+    }
+    if user is not None: 
+        login(request,user)
+        if user.userform_filled == False:
+            return render(request,'accounts/candidateintro.html',context=mydict)
+        return redirect('/dashboard')
+        #return redirect ('accounts/candidateintro.html')
+    
+            
+    return render(request,'accounts/login.html')

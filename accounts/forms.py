@@ -7,6 +7,11 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ('fullname','email')
+    def __init__(self, *args, **kwargs):
+       super(RegisterForm, self).__init__(*args, **kwargs)
+
+       del self.fields['password1']
+       del self.fields['password2']
 
 
 class LoginForm(AuthenticationForm):

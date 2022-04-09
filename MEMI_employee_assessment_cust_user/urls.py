@@ -17,7 +17,7 @@ from tkinter.font import nametofont
 from unicodedata import name
 from django.contrib import admin
 from django.urls import path, include
-from accounts.views import LoginView, RegisterView, candidateintro,candidateinfo
+from accounts.views import LoginView, RegisterView, candidateintro,candidateinfo,user_login
 
 urlpatterns = [
     path('candidateintro', candidateintro, name='candidateintro'),
@@ -25,5 +25,10 @@ urlpatterns = [
     path('candidateinfo/', candidateinfo, name='candidateinfo'),
     path('login/', LoginView.as_view(), name='login'),
     path('register', RegisterView.as_view(), name='register'),
+    path('user-login/<int:id>/', user_login, name='userlogin'),
     path('', include(('Assesment.urls','Assesment'), namespace='Assesment' )),
+
+
+
+    
 ]

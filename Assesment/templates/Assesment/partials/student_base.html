@@ -150,8 +150,9 @@
     }
     .greet{
       font-size: 18px;
-      color: black;
+      color:#0e5195;
       margin-right: 20px;
+      font-weight: bold
     }
     
   </style>
@@ -168,7 +169,7 @@
   <!--header area start-->
   <header>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-#eef3fa " style="background-color:#eef3fa;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-#eef3fa " style="background-color:#eef3fa	;">
 
         
       <div class="logo" style= "text-align: left; background-size: cover;" >
@@ -181,10 +182,11 @@
     <div class="collapse navbar-collapse" id="navbarNav" style= "text-align: left" >
     
       <ul class="navbar-nav"   >
-        
+        {% if request.user.is_staff %}
         <li class="nav-item active">
           <a class="nav-link" href="/dashboard">Home</a>
         </li>
+        {% endif %}
         </li>
         <li class="nav-item active">
           
@@ -209,7 +211,7 @@
       </ul>
     </div>
     
-    <span class="greet">Hello {{request.user}} !</span>
+    <span class="greet">Hello {{request.user.fullname}} !</span>
     <span ><a  class="greet" href="/logout">Logout</a></span>
     
     </nav> 
@@ -228,8 +230,7 @@
 
     </center>
 
-    <a href="/dashboard"><i class="fas fa-tachometer-alt"  style="color: black;" ></i><span style="color: black;">Assesment Overview</span></a>
-    <a href="/exam_categories"><i class="fas fa-book" style="color: black;" ></i><span style="color: black;" > Active Assessments</span></a>
+    
     {% comment %} <a href="/student/student-marks"><i class="fas fa-sort-numeric-up" style="color: black;"></i><span style="color: black;"></span></a> {% endcomment %}
   </div>
   <!--sidebar end-->

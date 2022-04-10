@@ -3,8 +3,9 @@
 <style>
   .greet{
     font-size: 18px;
-    color: black;
-    margin-right: 20px;
+      color:#0e5195;
+      margin-right: 20px;
+      font-weight: bold
   }
   
 </style>
@@ -22,10 +23,11 @@
   <div class="collapse navbar-collapse" id="navbarNav" >
  
     <ul class="navbar-nav" >
-      
+      {% if request.user.is_staff %}
       <li class="nav-item active">
         <a class="nav-link" href="/dashboard">Home</a>
       </li>
+      {% endif %}
       </li>
       <li class="nav-item active">
         
@@ -50,7 +52,7 @@
     </ul>
   </div>
  
-  <span class="greet">Hello, {{request.user}}</span>
+  <span class="greet">Hello, {{request.user.fullname}} ! </span>
   <span ><a  class="greet" href="/logout">Logout</a></span>
  
 </nav>

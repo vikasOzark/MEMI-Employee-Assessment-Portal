@@ -283,7 +283,8 @@ def alluserresults(request):
   })
   
 def student_dashboard(request):
-    total_question= 80 
+    total_ques= QuesModel.objects.values('question').distinct().count()
+    total_question= total_ques
     print("Request.user", request.user)
     candidateinfo = CustomUser.objects.get(username=request.user)
     total_course= QuesModel.objects.values('category').distinct().count() 

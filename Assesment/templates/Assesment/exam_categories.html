@@ -1,4 +1,4 @@
-{% extends 'Assesment/partials/student_base.html'%}
+{% extends 'Assesment/partials/dependencies.html' %}
 {% block content %}
 {%load static%}
 
@@ -75,23 +75,14 @@
   <div class="btn-group-vertical w-75" >
    
     <button class="btn btn-primary btn-lg btn-block" onclick="location.href = '/thankyoupge'" id="start"  style="margin-top : 10px; border-radius: 10px !important"> Submit All Answers</button>
- 
+  </div>  
+  
 </div>
 
 {% block script %}
 <script type="text/javascript">
-  setTimeout(function(){  
-    var element = document.getElementById("start") ;
-    element.disabled = false;
-}, 3000);
 
-window.onload = function(){
-  document.getElementById("start").disabled = true;
-  setTimeout(function(){  
-      var element = document.getElementById("start") ;
-      element.disabled = false;
-  }, 3000);
-}
+
 
 window.onload = function() {
   var minute = 59;

@@ -1,7 +1,8 @@
 
 
-{% comment %} {% extends 'Assesment/partials/dependencies.html' %} {% endcomment %}
 {% include 'Assesment/partials/student_base.html' %}
+
+{% comment %} {% extends 'Assesment/partials/dependencies.html' %} {% endcomment %}
 {% load widget_tweaks %}
 {% block content %}
 
@@ -26,20 +27,18 @@
       }
   
       .bg-c-blue {
-        background: #04868f;
+        background: #2898E0;
       }
   
       .bg-c-green {
-        background:#4C51BF;
+        background:#2898E0;
       }
   
       .bg-c-yellow {
-        background: #F56565;
+        background: #2898E0;
       }
   
-      .bg-c- {
-        background: #663a30;
-      }
+      
   
   
       .card {
@@ -75,48 +74,130 @@
       left: 0px;
       right: 0px;
     } 
+
+    .card .card{
+      overflow: hidden;
+      position: relative;
+      width: 33%; 
+      height: 100px;
+      flex-grow: 1;
+    }
+    
+
+    .primary-title {
+      color: #0e5195
+    }
     </style>
   </head>
 
 
-  <div class="container" >
+  <body >
+  style="padding: 10px; margin: 20px;"
+
+  <div class="container" style="position:relative; left: 220px; top: -200px " >
     <div class="row" >
       
   
-      <div class="col-md-4 col-xl-6" >
+      <div class="col-md-1 col-xl-3" >
         <div class="card bg-c-blue order-card" >
           <div class="card-block">
             <h6 class="m-b-20">Your Active Test Categories</h6>
-           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{total_course}}</span></h2>
+           <h5 class="text-right"><i class="fas fa-book f-left"></i><span>{{total_course}}</span></h5>
           </div>
         </div>
+
       </div>
   
-      <div class="col-md-4 col-xl-6">
+      <div class="col-md-1 col-xl-3">
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
             <h6 class="m-b-20">Total Questions</h6>
-            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_question}}</span></h2>
+            <h5 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_question}}</span></h5>
           </div>
         </div>
       </div>
       
-      <div class="col-md-4 col-xl-6"  >
+      <div class="col-md-1 col-xl-3"  >
         <div class="card bg-c-green order-card" >
           <div class="card-block">
             <h6 class="m-b-20">Total Time Remaining</h6>
-           <h2 class="text-right"><i class="fas fa-clock f-left"></i><span>60 Minutes</span></h2>
+           <h5 class="text-right"><i class="fas fa-clock f-left"></i><span>60 Minutes</span></h5>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 
+</div>
 
+<div class="container" style="position:relative; left: 100px; top: 350px ">
+  <div class="container spacing  text-center">
+    <h1 class="primary-title"><u>Welcome to Mercados EMI Employee Assessment Portal</u> </h1>
+    <p style="margin-top : 40px"> Please go through the following guidelines before starting the test,<b> All The Best!</b>  </p>
+  </div>
 
+  <div class="container spacing  text-center" style="margin-top : 40px" >
+    <h5><u>Examination Conduct</u></h5>
+  <ul class="fluid">
+    
+    <li>You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. 
+    </li>
+    <li>You are not permitted to have on your desk or on your person any unauthorised material during this examination. This includes but not limited to: 
+        <ul>
+          <li>Mobile phones</li>
+          <li> Smart watches and bands</li>
+          <li>Electronic devices (including additional monitors, earphones, headphones etc)</li>
+          <li>Headwear (hats, hoodies excluding religious headwear)</li>
+          <li>Draft paper (unless permitted)</li>
+          <li>Textbooks (unless specified)</li>
+          <li>Notes (unless specified)</li>
+        </ul>
+     </li>
+    <li>You are not permitted to take screenshots, record the screen, copy and paste questions or answers or otherwise attempt to take any of the content of this exam out of the exam for any purpose.</li>
+    <li>You are not permitted to post any requests for clarification of exam content. Answer all questions to the best of your ability and perception of the questions’ intent, make reasonable assumptions if necessary, to answer all questions. UTS assessments never apply negative marking techniques. </li>
+    <li>You must only attempt this exam once. Any additional attempts should only be used in the event where a serious technical issue has occurred and supporting evidence supporting this will be required. </li>
+    <li>Misconduct activity will lead to disqualification of candidature.</li>  
+    </ul>
 
+    <ul class="fluid">
+    <h5><u> Exam instructions </u></h5>
+    
+    <li> There are 60 in questions in this exam and will be presented one at a time.</li>
+    <li>Each question is worth the same marks. </li>
+    <li>During this exam you won’t be permitted to review previous questions.</li>       
+    </ol>
+    </ul>    
+  
+  
+
+</div>
+</div>
+
+  <div class="container text-center" align="center">
+  <div class="btn-group-vertical w-75" >
+     
+     <button class="btn btn-primary btn-lg btn-block" id="start" align="center" onclick="window.location='/exam_categories';"  style="margin-top : 925px; margin-left:98px; border-radius: 10px; !important">START TEST</button>
+  </div> 
+     <br>
+    <div class="info" style= "background-color: #e7f3fe; margin-left:110px;">
+      <p><strong>  Note:</strong>&nbsp;&nbsp;&nbsp;<span style="color: red">Above test link shall be activated in a while.</span> Proceed only when you have gone through the above information thoroughly. </p>
+    </div>
+ 
+</div>
+    {% block script %}
+    <script type="text/javascript">
+      window.onload = function(){
+        document.getElementById("start").disabled = true;
+        setTimeout(function(){  
+            var element = document.getElementById("start") ;
+            element.disabled = false;
+        }, 30000);
+    } 
+     
+
+    </script>
+    {% endblock script %}
+</body >
   
 <br><br><br><br><br><br><br><br><br><br>
 

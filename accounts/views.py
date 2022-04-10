@@ -1,4 +1,4 @@
-from termios import ECHOE
+# from termios import ECHOE
 from django.shortcuts import render
 from django.contrib import messages
 from . import forms,models
@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 import os
 from Assesment.models import categories
 from accounts.send_email import *
+
 class LoginView(auth_views.LoginView):
     # form_class = LoginForm
     template_name = 'accounts/login.html'
@@ -269,13 +270,15 @@ def user_login(request,id):
     CandidateForm= forms.CandidateForm()
     
     mydict={ 
+        
         'CandidateForm': CandidateForm
     }
     if user is not None: 
         login(request,user)
         if user.userform_filled == False:
             return render(request,'accounts/candidateintro.html',context=mydict)
-        return redirect('/dashboard')
+        return render(request,'accounts/test_taken.html')
+        # return redirect('/test_taken')
         #return redirect ('accounts/candidateintro.html')
     
             

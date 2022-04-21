@@ -199,6 +199,13 @@ def logoutPage(request):
     return redirect('/')
 
 def thankyoupge (request):
+
+    # getting the time value and printing that
+    if request.method == 'POST':
+        time_value = request.POST.get('time_value')
+        print('======= >>>>>>  ', time_value)
+        
+    
     q_answered_lr = list(QuesModel.objects.filter(category= "Logical Reasoning").values( 'saved_answer','ans' ))
     q_answered_PA = list(QuesModel.objects.filter(category= "Personality Assessment").values( 'saved_answer','ans'))
     q_answered_FQ = list(QuesModel.objects.filter(category= "Financial Question").values( 'saved_answer', 'ans'))

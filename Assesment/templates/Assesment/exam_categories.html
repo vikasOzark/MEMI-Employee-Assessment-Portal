@@ -30,7 +30,7 @@
 
 >
 
-<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;" ><b>Time Left: 60:00 </b></div>
+<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;" >00:00</div>
 
 <!-- hello test -->
 
@@ -58,12 +58,12 @@
         <td> <strong>{{c.category}} </strong> </td>
         
         {% if c.attempt == True  %}
-        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="/?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Review Answers</a></td>
+        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" id="session-set" href="/?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Review Answers</a></td>
         {% else %}
         
-        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="/starttest?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" id="session-set" href="/starttest?category={{c.category}} "><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
         {% endif %}
-        <td><b> {{c.attempted}} Attempted ; {{c.remaining}} Remaining </b> </td>
+        <td><b> {{c.attempted}} Attempted ; {{ c.remaining }} Remaining </b> </td>
 
       </tr>
       {% endfor %}
@@ -74,23 +74,41 @@
 
 </div>
 <div class="container text-center">
-  <div class="btn-group-vertical w-75" >
-   
-    <button class="btn btn-primary btn-lg btn-block" onclick="location.href = '/thankyoupge'" id="start"  style="margin-top : 10px; border-radius: 10px !important"> Submit All Answers</button>
-  </div>  
+  
+  <!-- sending time value with form to the value -->
+  <form action="/thankyoupge"  method="POST">
+    <div class="btn-group-vertical w-75" >
+      {% csrf_token %}
+      <input type="hidden" name="time_value" id="hidden_time_obj" value="">
+      <button class="btn btn-primary btn-lg btn-block" id="start" onclick="location.href = '/thankyoupge'"  style="margin-top : 10px; border-radius: 10px !important"> Submit All Answers</button>
+    </div>  
+  </form>
   
 </div>
 
 {% block script %}
 <script type="text/javascript">
 
+// getting the time value from the div element 
+  $('#start').click(function(){
+    var time_object = $('#timer').text();
+  
+    // adding the time value to the hidden input
+    var object = $("#hidden_time_obj").val(time_object);
+    var object = $("#hidden_time_obj").val();
 
+  })
+  
 
 window.onload = function() {
+    
   var minute = 59;
   var sec = 60;
+
   setInterval(function() {
-    document.getElementById("timer").innerHTML = " <b> Time Left : "+ minute + " <b>: " + sec;
+    document.getElementById("timer").innerHTML = minute +':'+ sec;
+    var time_object = document.getElementById("timer").innerText;
+    sessionStorage.setItem("time_object", time_object);
     sec--;
     if (sec == 00) {
       minute --;
@@ -103,7 +121,40 @@ window.onload = function() {
     }
     }
   }, 1000)
+
+  var time_object = sessionStorage.getItem("time_object");
+    var minute = time_object.slice(0,2);
+    var sec = time_object.slice(3,);
+
+    var minuteINT = parseInt(minute);
+    var secINT = parseInt(sec);
+    
+    var minute = minuteINT;
+    var sec = secINT;
+  setInterval(function() {
+    document.getElementById("timer").innerHTML = minute +':'+ sec;
+    var time_object = document.getElementById("timer").innerHTML
+    sessionStorage.setItem("time_object", time_object);
+    sec--;
+    if (sec == 00) {
+      minute --;
+      sec = 60;
+      if (minute == 0)  {
+        // stop timer
+         clearInterval(interval);
+        // click
+         document.getElementById
+         ('start').click();            
+    }
+    }
+  }, 1000)
 }
+  
+// storimg the time object into the sesssion storage
+$('#session-set').click(function(){
+  sessionStorage.setItem("time_object", time_object);
+});
+
 
 
 {% comment %} console.log('hello world')

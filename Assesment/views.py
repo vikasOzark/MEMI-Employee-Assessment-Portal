@@ -1,10 +1,8 @@
-from asyncio.windows_events import NULL
-from enum import unique
-from multiprocessing import context
+
 from django.shortcuts import render
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
-from pandas import notnull
+
 # from .forms import *
 
 from Assesment.models import QuesModel

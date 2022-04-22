@@ -5,8 +5,6 @@ from django.db import models
 
 import json
 from django.db import models
-import jsonfield
-
 # Create your models here.
 
  
@@ -49,15 +47,6 @@ class categories(models.Model):
    attempt= models.BooleanField(default = False)
    score = models.FloatField(default = False)
 #    time = models.CharField(max_length=50,null=True)
-  
-
-
-
-
-
-
-
-
 
 
 class resultModel(models.Model):

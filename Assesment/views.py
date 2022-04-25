@@ -1,10 +1,8 @@
-from asyncio.windows_events import NULL
-from enum import unique
-from multiprocessing import context
+
 from django.shortcuts import render
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
-from pandas import notnull
+
 # from .forms import *
 
 from Assesment.models import QuesModel
@@ -199,6 +197,13 @@ def logoutPage(request):
     return redirect('/')
 
 def thankyoupge (request):
+
+    # getting the time value and printing that
+    if request.method == 'POST':
+        time_value = request.POST.get('time_value')
+        print('======= >>>>>>  ', time_value)
+        
+    
     q_answered_lr = list(QuesModel.objects.filter(category= "Logical Reasoning").values( 'saved_answer','ans' ))
     q_answered_PA = list(QuesModel.objects.filter(category= "Personality Assessment").values( 'saved_answer','ans'))
     q_answered_FQ = list(QuesModel.objects.filter(category= "Financial Question").values( 'saved_answer', 'ans'))

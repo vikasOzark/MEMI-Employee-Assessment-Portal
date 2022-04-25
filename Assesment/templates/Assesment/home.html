@@ -66,7 +66,7 @@
     
 {% comment %} <h2 style="text-align: center;"><u> Assesment: {{category_name}} </u></h2> {% endcomment %}
  
-<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;" ><b>Time Left: 60:00 </b></div>
+<div align="center" id="timer"  style= "margin-top:0px; margin-right:0px; color: black; background-color: #28bced;">0:00</div>
  
 <form class= "form" method='post'  id="question_card" action='#'>
     {% csrf_token %}
@@ -222,10 +222,22 @@
             }; 
  
             window.onload = function() {
-                var minute = 1;
-                var sec = 60;
+
+                // Getting the time object from session and slicing and converting into integer
+                var time_object = sessionStorage.getItem("time_object");
+                var minute = time_object.slice(0,2);
+                var sec = time_object.slice(3,);
+
+                var minuteINT = parseInt(minute);
+                var secINT = parseInt(sec);
+                
+                var minute = minuteINT;
+                var sec = secINT;
                 setInterval(function() {
-                  document.getElementById("timer").innerHTML = " <b> Time Left : "+ minute + " <b>: " + sec;
+                  document.getElementById("timer").innerHTML = minute + ":" + sec;
+                  var time_object = document.getElementById("timer").innerHTML
+                  console.log(time_object)
+                  sessionStorage.setItem("time_object", time_object);
                   sec--;
                   if (sec == 00) {
                     minute --;
@@ -235,8 +247,6 @@
                 }, 1000);
               }
             </script> 
-
-        </script>
     {% endblock script %}
 </div>
 {% endblock %}
